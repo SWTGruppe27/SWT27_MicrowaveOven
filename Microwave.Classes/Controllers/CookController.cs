@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microwave.Classes.Interfaces;
 
 namespace Microwave.Classes.Controllers

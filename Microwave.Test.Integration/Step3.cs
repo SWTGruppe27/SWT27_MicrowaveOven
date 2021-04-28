@@ -20,7 +20,9 @@ namespace Microwave.Test.Integration
         private PowerTube _powerTube;
         private ITimer _fakeTimer;
         private IOutput _fakeOutput;
-        private IButton _fakeButton;
+        private IButton _fakePowerButton;
+        private IButton _fakeTimerButton;
+        private IButton _fakeStartCancelButton;
         private IDoor _fakeDoor;
 
         [SetUp]
@@ -28,18 +30,20 @@ namespace Microwave.Test.Integration
         {
             _fakeOutput = Substitute.For<IOutput>();
             _fakeTimer = Substitute.For<ITimer>();
-            _fakeButton = Substitute.For<IButton>();
+            _fakePowerButton = Substitute.For<IButton>();
+            _fakeTimerButton = Substitute.For<IButton>();
+            _fakeStartCancelButton = Substitute.For<IButton>();
             _powerTube = new PowerTube(_fakeOutput);
             _display = new Display(_fakeOutput);
             _fakeDoor = Substitute.For<IDoor>();
 
             _cookController = new CookController(_fakeTimer, _display, _powerTube);
-            _sut = new UserInterface(_fakeButton, _fakeButton, _fakeButton, _fakeDoor, _display, _light,
+            _sut = new UserInterface(_fakePowerButton, _fakeTimerButton, _fakeStartCancelButton, _fakeDoor, _display, _light,
                 _cookController);
         }
 
         [Test]
-        public void tesst()
+        public void 
         {
 
         }

@@ -83,6 +83,7 @@ namespace Microwave.Test.Integration
             _fakeTimer.Received(1).Stop();
         }
 
+        //UserInterface
 
     }
 }

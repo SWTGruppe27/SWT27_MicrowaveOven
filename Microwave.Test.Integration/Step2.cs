@@ -46,7 +46,7 @@ namespace Microwave.Test.Integration
         {
             _sut.StartCooking(50, 60);
 
-            Thread.Sleep(1000);
+            Thread.Sleep(1100);
 
             _fakeOutput.Received(1).OutputLine(Arg.Is<string>(s => s.ToLower().Contains(": 00:59")));
         }
@@ -56,7 +56,7 @@ namespace Microwave.Test.Integration
         {
             _sut.StartCooking(50, 60);
 
-            Thread.Sleep(2000);
+            Thread.Sleep(2100);
 
             _fakeOutput.Received(1).OutputLine(Arg.Is<string>(s => s.ToLower().Contains(": 00:58")));
         }

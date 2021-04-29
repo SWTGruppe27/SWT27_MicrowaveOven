@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Microwave.Classes.Boundary;
@@ -9,6 +10,7 @@ using Microwave.Classes.Controllers;
 using Microwave.Classes.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
+using Timer = Microwave.Classes.Boundary.Timer;
 
 namespace Microwave.Test.Integration
 {
@@ -39,5 +41,24 @@ namespace Microwave.Test.Integration
             Assert.That(_timer.TimeRemaining,Is.EqualTo(60));
         }
 
+        [Test]
+        public void CookController_DisplayShowTime_Correct1sec()
+        {
+            _sut.StartCooking(50, 60);
+
+            Thread.Sleep(1000);
+
+            _fakeOutput.Received(1).OutputLine(Arg.Is<string>(s => s.ToLower().Contains(": 00:59")));
+        }
+
+        [Test]
+        public void CookController_DisplayShowTime_Correct2Sec()
+        {
+            _sut.StartCooking(50, 60);
+
+            Thread.Sleep(2000);
+
+            _fakeOutput.Received(1).OutputLine(Arg.Is<string>(s => s.ToLower().Contains(": 00:58")));
+        }
     }
 }

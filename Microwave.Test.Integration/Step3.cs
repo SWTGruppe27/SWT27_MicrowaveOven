@@ -72,6 +72,37 @@ namespace Microwave.Test.Integration
             _fakeOutput.Received(2).OutputLine(Arg.Is<string>(s => s.ToLower().Contains(": 50 w")));
         }
 
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        [TestCase(7)]
+        [TestCase(8)]
+        [TestCase(9)]
+        [TestCase(10)]
+        [TestCase(11)]
+        [TestCase(12)]
+        [TestCase(13)]
+        [TestCase(14)]
+
+        public void UserInterface_PowerTubeStartCancelPressed_ShowCorrectPower(int numberOfTimes)
+        {
+            int power = 0;
+
+            for (int i = 0; i < numberOfTimes; i++)
+            {
+                power += 50;
+                _fakePowerButton.Pressed += Raise.EventWith(new EventArgs());
+            }
+
+            _fakeTimerButton.Pressed += Raise.EventWith(new EventArgs());
+            _fakeStartCancelButton.Pressed += Raise.EventWith(new EventArgs());
+
+            _fakeOutput.Received(1).OutputLine(Arg.Is<string>(s => s.ToLower().Contains($"powertube works with {power}")));
+        }
+
         [Test]
         public void UserInterface_DisplayOnTimerPressed_ShowTime()
         {
